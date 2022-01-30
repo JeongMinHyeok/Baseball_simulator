@@ -4,11 +4,14 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver import ActionChains
 import time
+import warnings
+warnings.filterwarnings('ignore')
 
 def crawler(year_xpath):
     # Chromedriver 옵션 설정
     options = webdriver.ChromeOptions()
-    # options.add_argument("headless")
+    options.add_argument("headless")
+    options.add_argument("window-size=976,1056")
 
     # execute driver & connect page
     driver = webdriver.Chrome('./chromedriver', options=options)
@@ -26,7 +29,7 @@ def crawler(year_xpath):
     # 연도 지정
     time.sleep(2)
     year_select = driver.find_element_by_xpath(year_xpath)
-    driver.execute_script("window.scrollTo(0, 100);") # 광고로 인해 옵션버튼이 가려질 수 있으므로
+    driver.execute_script("window.scrollTo(0, 200);") # 광고로 인해 옵션버튼이 가려질 수 있으므로
     year_text = year_select.text
     year_select.click()
     
